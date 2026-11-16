@@ -30,7 +30,7 @@ The ledger is optional here. If `$PY` is empty (no working Python 3; on Windows 
 - **What breaks if you remove it.**
 - **How to verify it:** the test, request or log line that would show it is right.
 
-Start with the big picture (how the pieces connect), then go decision by decision. Go deeper where the learner asks or shows confusion; do not repeat what they already understand.
+Pace it: give the big picture first (how the pieces connect), then cover two or three decisions per turn and stop to ask whether it is clear or what to go deeper on. Do not dump every decision in one message. Go deeper where the learner asks or shows confusion; do not repeat what they already understand.
 
 ## Be honest
 
@@ -41,8 +41,8 @@ Start with the big picture (how the pieces connect), then go decision by decisio
 ## Ending
 
 1. **How would you tell it?** Give a 4-5 sentence version the learner could say aloud (in an interview or to a colleague).
-2. Ask the learner to redo 1-3 of the points in their own words (teach-back). Grade each with the 30-point rubric from `/learning-ledger:quiz` before correcting anything.
-3. If a teach-back happened, offer `/learning-ledger:log-session` with `support: full_solution` (the explanation came first) and `evidence: observed_answers`. Say that a level above `with_support` needs a later unaided `/learning-ledger:quiz` or `/learning-ledger:pair`. If no teach-back happened, do not propose logging.
+2. The teach-back is mandatory: the explanation is not finished until the learner has redone 1-3 of the points in their own words. Ask for it even if the explanation was long or was interrupted. Grade each point out of 30 before correcting anything: Correctness 12, Completeness 6, Reasoning 5, Concrete example 3, Clarity 3, Version/source awareness 1. Log the average of the graded points as `score_30`.
+3. If a teach-back happened, offer `/learning-ledger:log-session` with `support: full_solution` (the explanation came first) and `evidence: observed_answers`. If the stored level of the topic (from `show`) is already `autonomous` or `consolidated`, warn first: logging this session would lower it to `with_support` and reset the consolidation progress, so propose logging only if the learner still wants it. Do not quiz the same topic on the same day as an explanation: the ledger cannot tell that the answers are not independent, so a quiz right after would be logged as `full_solution` support too, and real evidence needs another day. If no teach-back happened, do not propose logging.
 
 ## Rules
 

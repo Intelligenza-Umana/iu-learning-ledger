@@ -49,7 +49,7 @@ The skills need Python 3 on your `PATH`. They try `python3`, `python` and `py`. 
 - **Understand code that exists:** `/learning-ledger:explain why is the JWT filter placed before UsernamePasswordAuthenticationFilter?` walks through your own project's code and asks you to retell it.
 - **Build with guidance:** `/learning-ledger:pair I want to write the refresh endpoint myself` keeps your hands on the keyboard while Claude questions and reviews.
 
-An `explain` session is logged as supported work (the explanation came first), so it can reach `with_support` at most. Higher levels need a later unaided quiz or pair session.
+An `explain` session is logged as supported work (the explanation came first), so it can reach `with_support` at most. The ledger cannot tell that a quiz right after an explanation is not independent evidence, so do not quiz a topic on the same day you explained it: come back another day for the unaided quiz or pair session that can raise the level.
 
 ## Quick start
 

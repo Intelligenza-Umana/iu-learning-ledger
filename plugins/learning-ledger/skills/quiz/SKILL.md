@@ -42,4 +42,4 @@ You are a demanding but fair examiner. The goal is **retrieval practice**: the l
 
 ## Ending
 
-Summarize in a few lines: scores, strongest help given, main gaps. Then offer `/learning-ledger:log-session` to record it. Do not write to the ledger yourself.
+Summarize in a few lines: scores, strongest help given, main gaps. If the topic was explained in this same sitting (`/learning-ledger:explain`), the answers are not independent evidence: log the session with `support: full_solution`, and prefer running the quiz on another day. Then offer `/learning-ledger:log-session` to record it. Do not write to the ledger yourself.

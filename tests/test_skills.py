@@ -61,6 +61,35 @@ class SkillStructure(unittest.TestCase):
         for needle in ["explain", "pair", "full_solution"]:
             self.assertIn(needle, log)
 
+    def test_review_fixes_keep_the_ledger_honest(self):
+        _, explain = read_skill("explain")
+        _, pair = read_skill("pair")
+        _, quiz = read_skill("quiz")
+        _, log = read_skill("log-session")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        # 1: no same-day quiz right after an explanation
+        self.assertIn("same day", explain.lower())
+        self.assertIn("explain", quiz)
+        self.assertIn("full_solution", quiz)
+        self.assertIn("same day", readme.lower())
+        self.assertNotIn("Higher levels need a later unaided quiz or pair session", readme)
+        # 2: do not demote a known topic silently
+        for body in (explain, log):
+            self.assertIn("consolidation progress", body)
+            self.assertIn("autonomous", body)
+        # 3: probing questions are not support, revealing ones are
+        self.assertIn("probing", pair.lower())
+        self.assertIn("reveal", pair.lower())
+        # 4: one question per message, ask before telling
+        self.assertIn("one question per message", pair.lower())
+        self.assertIn("ask before you tell", pair.lower())
+        # 5: pacing and mandatory teach-back
+        self.assertIn("per turn", explain.lower())
+        self.assertIn("mandatory", explain.lower())
+        # 6: rubric inline, score to log
+        self.assertIn("Correctness 12", explain)
+        self.assertIn("score_30", explain)
+
 
 class Release(unittest.TestCase):
     def test_release_metadata_consistent(self):

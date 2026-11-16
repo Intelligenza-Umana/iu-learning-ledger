@@ -32,7 +32,7 @@ If `$PY` is empty, no working Python 3 was found (on Windows `python3` is often 
 
 ## Rules
 
-- Sessions from `/learning-ledger:explain`: record with `support: full_solution` (the explanation came first) and `evidence: observed_answers`, and only if the learner did a teach-back. The script will cap the result at `with_support`.
+- Sessions from `/learning-ledger:explain`: record with `support: full_solution` (the explanation came first) and `evidence: observed_answers`, and only if the learner did a teach-back. The script will cap the result at `with_support`. If the topic is already `autonomous` or `consolidated`, the dry run will show the level dropping to `with_support` and the consolidation progress resetting: say so before asking for confirmation, and let the learner decide.
 - Sessions from `/learning-ledger:pair`: `type: exercise`, `evidence: observed_exercise` (you watched them work) or `reviewed_code`, and `support` equal to the strongest help given.
 
 - Never claim a level above the evidence. If unsure between two levels, choose the lower one.
