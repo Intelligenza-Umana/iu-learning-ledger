@@ -42,6 +42,14 @@ class SkillStructure(unittest.TestCase):
                        "answer in the user's language", "not a git repository"]:
             self.assertIn(needle, low, needle)
 
+    def test_pair_contract(self):
+        _, body = read_skill("pair")
+        low = body.lower()
+        for needle in ["one question at a time", "exercise", "observed_exercise", "reviewed_code",
+                       "full_solution", "guiding question", "defend", "bug", "risk",
+                       "${claude_plugin_root}", "answer in the user's language", "never commit"]:
+            self.assertIn(needle, low, needle)
+
 
 if __name__ == "__main__":
     unittest.main()
