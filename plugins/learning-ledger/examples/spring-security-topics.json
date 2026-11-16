@@ -1,0 +1,14 @@
+{
+  "topics": [
+    {"id": "sec-jwt-validation-filter", "name": "JWT validation in a filter", "area": "security"},
+    {"id": "sec-refresh-token-rotation", "name": "Refresh token rotation and reuse detection", "area": "security"},
+    {"id": "sec-refresh-race-conditions", "name": "Atomic refresh and race conditions", "area": "security"},
+    {"id": "sec-token-revocation-logout", "name": "Logout and token revocation", "area": "security"},
+    {"id": "sec-password-encoding", "name": "Password encoding and upgrades", "area": "security"},
+    {"id": "sec-method-security", "name": "Method security and where to enforce it", "area": "security"},
+    {"id": "sec-csrf-cors-sessions", "name": "CSRF, CORS and session policy", "area": "security"},
+    {"id": "sec-rate-limiting", "name": "Rate limiting and login throttling", "area": "security"},
+    {"id": "sec-secrets-config", "name": "Secrets and configuration", "area": "security"},
+    {"id": "sec-mass-assignment", "name": "DTOs and mass assignment", "area": "security"}
+  ]
+}
