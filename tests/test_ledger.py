@@ -286,6 +286,22 @@ class Report(unittest.TestCase):
         self.assertEqual(r.returncode, 2)
 
 
+class ExplainSessionCap(unittest.TestCase):
+    def test_explain_session_cannot_exceed_with_support(self):
+        t = topic(level="fragile", last_attempt="2026-10-28", attempts=1)
+        _, r = rec({"t": t}, payload(outcome="autonomous", support="full_solution",
+                                     evidence="observed_answers", on="2026-11-02"))
+        self.assertEqual(r["after"]["level"], "with_support")
+        self.assertTrue(r["capped"])
+        self.assertTrue(any("full_solution" in reason for reason in r["reasons"]))
+
+    def test_explain_without_teach_back_is_self_assessed(self):
+        t = topic(level="fragile", last_attempt="2026-10-28", attempts=1)
+        _, r = rec({"t": t}, payload(outcome="autonomous", support="full_solution",
+                                     evidence="self_assessed", on="2026-11-02"))
+        self.assertEqual(r["after"]["level"], "fragile")
+
+
 class Cli(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -366,6 +382,54 @@ class Cli(unittest.TestCase):
         self.assertEqual(r.returncode, 0)
         r = self.run_cli("topic", "add", "--id", "jpa-basics", "--name", "dup")
         self.assertEqual(r.returncode, 2)
+
+
+class TopicPacks(unittest.TestCase):
+    EXAMPLES = os.path.join(ROOT, "plugins", "learning-ledger", "examples")
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = os.path.join(self.tmp.name, "ledger")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def run_cli(self, *args):
+        return subprocess.run(
+            [sys.executable, "-I", SCRIPT, "--dir", self.dir, "--today", "2026-11-03", *args],
+            capture_output=True, text=True)
+
+    def packs(self):
+        import glob
+        out = {}
+        for path in sorted(glob.glob(os.path.join(self.EXAMPLES, "*-topics.json"))):
+            with open(path, encoding="utf-8") as f:
+                out[os.path.basename(path)] = json.load(f)["topics"]
+        return out
+
+    def test_every_pack_is_valid(self):
+        seen = set()
+        for name, topics in self.packs().items():
+            for t in topics:
+                self.assertRegex(t["id"], L.ID_RE.pattern, name)
+                self.assertNotIn(t["id"], seen, f"duplicate id {t['id']}")
+                seen.add(t["id"])
+                self.assertTrue(t["name"].strip())
+
+    def test_security_pack_size(self):
+        topics = self.packs()["spring-security-topics.json"]
+        self.assertTrue(10 <= len(topics) <= 12)
+        self.assertTrue(all(t["id"].startswith("sec-") for t in topics))
+
+    def test_import_twice_is_idempotent_with_java_spring(self):
+        self.run_cli("init")
+        self.run_cli("topic", "import", os.path.join(self.EXAMPLES, "java-spring-topics.json"))
+        sec = os.path.join(self.EXAMPLES, "spring-security-topics.json")
+        first = self.run_cli("topic", "import", sec)
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.assertGreaterEqual(len(json.loads(first.stdout)["added"]), 10)
+        again = json.loads(self.run_cli("topic", "import", sec).stdout)
+        self.assertEqual(again["added"], [])
 
 
 if __name__ == "__main__":
