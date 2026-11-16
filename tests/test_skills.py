@@ -50,6 +50,17 @@ class SkillStructure(unittest.TestCase):
                        "${claude_plugin_root}", "answer in the user's language", "never commit"]:
             self.assertIn(needle, low, needle)
 
+    def test_existing_skills_point_to_new_ones(self):
+        _, today = read_skill("study-today")
+        self.assertIn("/learning-ledger:explain", today)
+        self.assertIn("/learning-ledger:pair", today)
+        self.assertIn("spring-security", today)
+        _, practice = read_skill("practice")
+        self.assertIn("/learning-ledger:pair", practice)
+        _, log = read_skill("log-session")
+        for needle in ["explain", "pair", "full_solution"]:
+            self.assertIn(needle, log)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -17,13 +17,13 @@ If `$PY` is empty, no working Python 3 was found (on Windows `python3` is often 
 ## Steps
 
 1. Run `$LEDGER status` and `$LEDGER due`.
-   - Error "not initialized": offer `$LEDGER init`, then import a starter pack from `"${CLAUDE_PLUGIN_ROOT}/examples/"` with `$LEDGER topic import <file>` (`java-spring`, `python-core`, `sql-databases`, `system-design`, `devops-basics`; ask which fits), or adding their own topics with `topic add`. Stop there.
+   - Error "not initialized": offer `$LEDGER init`, then import a starter pack from `"${CLAUDE_PLUGIN_ROOT}/examples/"` with `$LEDGER topic import <file>` (`java-spring`, `python-core`, `sql-databases`, `system-design`, `devops-basics`, `spring-security`; ask which fits), or adding their own topics with `topic add`. Stop there.
 2. **If `rest_day` is true,** say it is a rest day, mention what is due next, and let the user decide. Do not push.
 3. Otherwise recommend **one** priority:
    - the first item in `due` (already sorted: weakest level first, then oldest), or
    - if nothing is due, the most useful `unassessed` topic, or an item in `upcoming`.
    Say why in one or two sentences (level, how overdue, known `gaps`).
-4. Offer the right next step: `/learning-ledger:quiz` for a due review, `/learning-ledger:practice` for a topic that needs applied work.
+4. Offer the right next step: `/learning-ledger:quiz` for a due review, `/learning-ledger:practice` for a topic that needs applied work, `/learning-ledger:explain` to understand code that already exists in the project, `/learning-ledger:pair` to build something with guidance while the learner writes.
 5. Add at most one line of context: how many topics are due, and how many are unassessed.
 
 ## Rules
