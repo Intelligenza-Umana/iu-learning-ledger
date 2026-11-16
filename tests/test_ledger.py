@@ -286,6 +286,22 @@ class Report(unittest.TestCase):
         self.assertEqual(r.returncode, 2)
 
 
+class ExplainSessionCap(unittest.TestCase):
+    def test_explain_session_cannot_exceed_with_support(self):
+        t = topic(level="fragile", last_attempt="2026-10-28", attempts=1)
+        _, r = rec({"t": t}, payload(outcome="autonomous", support="full_solution",
+                                     evidence="observed_answers", on="2026-11-02"))
+        self.assertEqual(r["after"]["level"], "with_support")
+        self.assertTrue(r["capped"])
+        self.assertTrue(any("full_solution" in reason for reason in r["reasons"]))
+
+    def test_explain_without_teach_back_is_self_assessed(self):
+        t = topic(level="fragile", last_attempt="2026-10-28", attempts=1)
+        _, r = rec({"t": t}, payload(outcome="autonomous", support="full_solution",
+                                     evidence="self_assessed", on="2026-11-02"))
+        self.assertEqual(r["after"]["level"], "fragile")
+
+
 class Cli(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
