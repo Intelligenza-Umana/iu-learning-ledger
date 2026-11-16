@@ -7,6 +7,8 @@ Small project, simple rules.
 - **Skills** are plain markdown in `plugins/learning-ledger/skills/`. Skills report evidence; they must not try to decide levels.
 - Standard library only. No dependencies.
 
+Skills are checked by `tests/test_skills.py` (frontmatter, expected set, key contract words).
+
 Run the tests before opening a PR:
 
 ```bash

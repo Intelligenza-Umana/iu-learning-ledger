@@ -39,11 +39,21 @@ The skills need Python 3 on your `PATH`. They try `python3`, `python` and `py`. 
 | `/learning-ledger:quiz` | One question at a time, free recall, graded out of 30 before any explanation. Modes: quick quiz, interrogation, interview simulation, error review. |
 | `/learning-ledger:practice` | Gives a brief (goal, constraints, success criteria) with no solution, then reviews your code and classifies findings as bug, risk, optional improvement or style. |
 | `/learning-ledger:weekly-report` | Read-only summary of the last 7 days: sessions, unaided vs supported, level movement, what is capped or due. |
+| `/learning-ledger:explain` | Explains code (existing, or generated on request) decision by decision: why it exists, how it runs, alternatives, what to verify. Critiques weak choices, then asks you to teach it back. |
+| `/learning-ledger:pair` | You write the code; Claude asks one reasoning question at a time, reviews each piece and challenges weak choices. |
 | `/learning-ledger:log-session` | Records the session. Shows a dry run (`before → after`, why a level was capped, next review weekday) and writes only after you confirm. |
+
+## Three ways to learn
+
+- **Be tested:** `quiz` and `practice` check what you can do without help.
+- **Understand code that exists:** `/learning-ledger:explain why is the JWT filter placed before UsernamePasswordAuthenticationFilter?` walks through your own project's code and asks you to retell it.
+- **Build with guidance:** `/learning-ledger:pair I want to write the refresh endpoint myself` keeps your hands on the keyboard while Claude questions and reviews.
+
+An `explain` session is logged as supported work (the explanation came first), so it can reach `with_support` at most. Higher levels need a later unaided quiz or pair session.
 
 ## Quick start
 
-1. Ask Claude: "what should I study today?" (`study-today`). On first use it offers to create the ledger and import a starter topic pack from `examples/` (Java/Spring, Python, SQL/databases, system design, DevOps basics; 68 topics in total) or you add your own.
+1. Ask Claude: "what should I study today?" (`study-today`). On first use it offers to create the ledger and import a starter topic pack from `examples/` (Java/Spring, Spring Security, Python, SQL/databases, system design, DevOps basics; 78 topics in total) or you add your own.
 2. Run `/learning-ledger:quiz` on a topic.
 3. Run `/learning-ledger:log-session`. Review the dry run, confirm.
 
@@ -73,6 +83,10 @@ Files: `topics.json` (current state), `sessions.jsonl` (append-only history), `c
 ### Review intervals (working days)
 
 Based on the `score_30` of the session when given, then capped by level: under 50% → 1, 50–59% → 2, 60–69% → 3, 70–84% → 7, 85–94% → 14, 95%+ → 30. `fragile` is capped at 3 and `with_support` at 5. Self-assessed sessions always review in 1. You can override with `interval_weekdays`.
+
+## Stability
+
+From 1.0 the file formats of the ledger (`topics.json`, `sessions.jsonl`, `config.json`) and the JSON output of `ledger.py` follow semantic versioning.
 
 ## Tests
 

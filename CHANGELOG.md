@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0
+- `explain` skill: explains existing or generated code decision by decision, critiques weak choices and asks for a teach-back.
+- `pair` skill: the learner writes, Claude asks reasoning questions, reviews each piece and challenges choices.
+- Spring Security topic pack (10 topics).
+- `study-today`, `practice` and `log-session` know about the new skills.
+- Skill structure tests. Ledger file formats and `ledger.py` JSON output are stable from this version.
+
 ## 0.2.2
 - README: note about installing Python 3 on Windows.
 

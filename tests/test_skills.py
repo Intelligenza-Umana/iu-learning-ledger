@@ -62,5 +62,20 @@ class SkillStructure(unittest.TestCase):
             self.assertIn(needle, log)
 
 
+class Release(unittest.TestCase):
+    def test_release_metadata_consistent(self):
+        import json
+        plugin = json.loads((ROOT / "plugins/learning-ledger/.claude-plugin/plugin.json").read_text())
+        self.assertEqual(plugin["version"], "1.0.0")
+        changelog = (ROOT / "CHANGELOG.md").read_text()
+        first = next(l for l in changelog.splitlines() if l.startswith("## "))
+        self.assertEqual(first, "## 1.0.0")
+        readme = (ROOT / "README.md").read_text()
+        self.assertEqual(readme, (ROOT / "plugins/learning-ledger/README.md").read_text())
+        self.assertIn("`/learning-ledger:explain`", readme)
+        self.assertIn("`/learning-ledger:pair`", readme)
+        self.assertIn("78 topics", readme)
+
+
 if __name__ == "__main__":
     unittest.main()
