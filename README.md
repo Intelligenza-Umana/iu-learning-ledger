@@ -2,7 +2,7 @@
 
 **An [Intelligenza Umana](https://github.com/fabiozagaria/intelligenza-umana) project.** See the [official project registry](https://github.com/fabiozagaria/intelligenza-umana/blob/main/docs/PROJECT_REGISTRY.md).
 
-[![tests](https://github.com/fabiozagaria/learning-ledger/actions/workflows/test.yml/badge.svg)](https://github.com/fabiozagaria/learning-ledger/actions/workflows/test.yml)
+[![tests](https://github.com/fabiozagaria/iu-learning-ledger/actions/workflows/test.yml/badge.svg)](https://github.com/fabiozagaria/iu-learning-ledger/actions/workflows/test.yml)
 
 An honest evidence log for learning, as a [Claude Code](https://claude.com/claude-code) plugin.
 
@@ -25,7 +25,7 @@ Everything is stored locally in plain files. No account, no network, no dependen
 ## Install
 
 ```bash
-claude plugin marketplace add fabiozagaria/learning-ledger
+claude plugin marketplace add fabiozagaria/iu-learning-ledger
 claude plugin install learning-ledger@learning-ledger
 ```
 
@@ -63,17 +63,17 @@ The ledger lives in `.learning-ledger/` in the directory where you run Claude (o
 
 ## The ledger script
 
-`plugins/learning-ledger/scripts/ledger.py` is a standalone CLI (stdlib only). Output is JSON; errors are JSON on stderr with exit code 2.
+`plugins/learning-ledger/scripts/ledger.py` is a standalone CLI (stdlib only). From the repository root, first run `cd plugins/learning-ledger`. Output is JSON; errors are JSON on stderr with exit code 2.
 
 ```bash
-python3 scripts/ledger.py init [--rest-days sat,sun]
+python3 scripts/ledger.py init --rest-days sat,sun
 python3 scripts/ledger.py topic add --id jpa-n-plus-one --name "N+1 queries" --area persistence
 python3 scripts/ledger.py topic import examples/java-spring-topics.json
 python3 scripts/ledger.py due
 python3 scripts/ledger.py status
 python3 scripts/ledger.py show jpa-n-plus-one
 python3 scripts/ledger.py report [--days 7]
-echo '{...}' | python3 scripts/ledger.py record --dry-run
+# Pass a valid session JSON document on stdin to preview a record.
 ```
 
 Files: `topics.json` (current state), `sessions.jsonl` (append-only history), `config.json` (rest days).
@@ -91,6 +91,8 @@ Based on the `score_30` of the session when given, then capped by level: under 5
 From 1.0 the file formats of the ledger (`topics.json`, `sessions.jsonl`, `config.json`) and the JSON output of `ledger.py` follow semantic versioning.
 
 ## Tests
+
+From the repository root:
 
 ```bash
 python3 -m unittest discover -s tests

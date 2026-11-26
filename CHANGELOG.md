@@ -2,6 +2,8 @@
 
 Project attribution: identified as an Intelligenza Umana project in the README.
 
+Documentation update: corrected repository links and clarified the working directory for CLI examples.
+
 ## 1.0.0
 - `explain` skill: explains existing or generated code decision by decision, critiques weak choices and asks for a teach-back.
 - `pair` skill: the learner writes, Claude asks reasoning questions, reviews each piece and challenges choices.
