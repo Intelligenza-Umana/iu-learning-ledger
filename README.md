@@ -1,5 +1,7 @@
 # learning-ledger
 
+**An [Intelligenza Umana](https://github.com/fabiozagaria/intelligenza-umana) project.** See the [official project registry](https://github.com/fabiozagaria/intelligenza-umana/blob/main/docs/PROJECT_REGISTRY.md).
+
 [![tests](https://github.com/fabiozagaria/learning-ledger/actions/workflows/test.yml/badge.svg)](https://github.com/fabiozagaria/learning-ledger/actions/workflows/test.yml)
 
 An honest evidence log for learning, as a [Claude Code](https://claude.com/claude-code) plugin.
