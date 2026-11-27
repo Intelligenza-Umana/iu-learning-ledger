@@ -1,6 +1,6 @@
 # learning-ledger
 
-**An [Intelligenza Umana](https://github.com/fabiozagaria/intelligenza-umana) project.** See the [official project registry](https://github.com/fabiozagaria/intelligenza-umana/blob/main/docs/PROJECT_REGISTRY.md).
+**An [Intelligenza Umana](https://github.com/Intelligenza-Umana/intelligenza-umana) project.** See the [official project registry](https://github.com/Intelligenza-Umana/intelligenza-umana/blob/main/docs/PROJECT_REGISTRY.md).
 
 [![tests](https://github.com/Intelligenza-Umana/iu-learning-ledger/actions/workflows/test.yml/badge.svg)](https://github.com/Intelligenza-Umana/iu-learning-ledger/actions/workflows/test.yml)
 
